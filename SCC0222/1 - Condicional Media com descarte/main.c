@@ -34,13 +34,19 @@ float arredondar(float valor) {
  */
 int main() {
 
-    float A = 5.3, B = 5.6, C = 5.4, D = 5.5;
+    double A = 2492.35, B = 2492.32, C = 2492.34, D = 2492.33;
 
-    scanf("%f %f %f %f", &A, &B, &C, &D);
+    scanf("%lf %lf %lf %lf", &A, &B, &C, &D);//2492.35 2492.32 2492.32 2492.33
 
-    float minimo = MIN(A, MIN(B, MIN(C, D)));
+    float minimo = MIN(C, D);
+    
+    minimo = MIN(B,minimo);
+    
+    minimo = MIN(A,minimo);
 
-    printf("%.4f", (A + B + C + D - minimo) / 3);
+    printf("%.4f", (- minimo + A + B + C + D ) / 3);
+    
+    //printf("\n\n%.4f", ( A  + C + D ) / 3);
 
     return (EXIT_SUCCESS);
 }
