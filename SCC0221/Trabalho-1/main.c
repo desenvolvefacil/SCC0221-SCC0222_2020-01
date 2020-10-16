@@ -38,7 +38,13 @@ void imprimirMatriz(float m[11][7], int linhas, int colunas) {
  */
 int main(int argc, char** argv) {
 
-    int colunas = 0, linhas = 3, i, j;
+    int colunas = 0, linhas = 11, i, j;
+
+    do {
+        printf("Digite o numero pacientes (11): ");
+        scanf("%d", &linhas);
+
+    } while (linhas != 11);
 
     //faz a leitura do número de colunas
     do {
