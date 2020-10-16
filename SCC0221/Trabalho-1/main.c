@@ -19,63 +19,15 @@
 
 //https://github.com/desenvolvefacil/SCC0221-SCC0222_2020-01/tree/master/SCC0221/Trabalho-1
 
-void lerDados(float **m, int linhas, int colunas) {
-
-}
-
-void liberarMemoria(float **m, int linhas) {
-    int i;
-
-    if (m == NULL) return;
-
-    for (i = 0; i < linhas; i++) {
-        //libera as colunas da linha
-        free(m[i]);
-    }
-
-    //libera a linhas
-    free(m);
-
-    return;
-}
-
-//faz a alocação dinamica da matriz
-
-float ** criarMatriz(int linhas, int colunas) {
-
-    float **m = calloc(linhas, sizeof (float));
-
-    if (m == NULL) {
-        printf("Falta de Memoria 1");
-        exit(EXIT_FAILURE);
-    }
+void imprimirMatriz(float m[11][7], int linhas, int colunas) {
 
     int i, j;
-    for (i = 0; i < linhas; i++) {
-        m[i] = calloc(colunas, sizeof (float));
 
-        if (m[i] == NULL) {
-            printf("Falta de Memoria 2");
-            exit(EXIT_FAILURE);
-        }
-    }
-
+    printf("\n\n**************************\n\n");
 
     for (i = 0; i < linhas; i++) {
         for (j = 0; j < colunas; j++) {
-            m[i][j] = 0;
-        }
-    }
-
-    return m;
-}
-
-void mostrarMatriz(float **m, int linhas, int colunas) {
-    int i, j;
-
-    for (i = 0; i < linhas; i++) {
-        for (j = 0; j < colunas; j++) {
-            printf("%.2f ", m[i][j]);
+            printf("%.1f  ", m[i][j]);
         }
         printf("\n");
     }
@@ -86,8 +38,7 @@ void mostrarMatriz(float **m, int linhas, int colunas) {
  */
 int main(int argc, char** argv) {
 
-    float **m;
-    int colunas = 0, linhas = 4;
+    int colunas = 0, linhas = 3, i, j;
 
     //faz a leitura do número de colunas
     do {
@@ -96,12 +47,41 @@ int main(int argc, char** argv) {
 
     } while (colunas < 3 || colunas > 7);
 
-    //cria a matriz
-    m = criarMatriz(linhas, colunas);
+    //meu computador ta meio zuado
+    float m[11][7];
 
-    lerDados(m, linhas, colunas);
+    for (i = 0; i < linhas - 1; i++) {
 
-    int i, j;
+        printf("Historico do Paciente %d\n", i + 1);
+
+        for (j = 0; j < colunas; j++) {
+
+            if (j != colunas - 1) {
+
+                printf("Digite a entrada %d\n", j + 1);
+                scanf("%f", &m[i][j]);
+
+            } else {
+
+                do {
+
+                    printf("Digite o resultado do Paciente %d\n(1) Saudavel\n(-1) Doente\n", i + 1);
+                    scanf("%f", &m[i][j]);
+
+                } while (m[i][j] != 1 && m[i][j] != -1);
+
+            }
+
+        }
+    }
+
+    printf("Digite os dados do paciente a ser avaliado\n");
+
+    for (j = 0; j < colunas - 1; j++) {
+        printf("Digite a entrada %d\n", j + 1);
+        scanf("%f", &m[linhas - 1][j]);
+    }
+
 
     float menorDistancia = 0.0;
     int linhaMenorDistancia = 0;
@@ -125,13 +105,17 @@ int main(int argc, char** argv) {
             menorDistancia = distancia;
             linhaMenorDistancia = i;
         }
-
     }
 
+    //printf("%d",linhaMenorDistancia);
 
+    printf("Analisando Dados\n\n");
 
+    printf("O historico é bem proximo ao do paciente %d\n\n", linhaMenorDistancia + 1);
+    printf("Provavel Resultado: \n");
+    printf(m[linhaMenorDistancia][colunas - 1] == 1 ? "Saudavel\n\n" : "Doente\n\n");
 
-    liberarMemoria(m, linhas);
+    //imprimirMatriz(m, linhas, colunas);
 
     return (EXIT_SUCCESS);
 }
