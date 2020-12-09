@@ -93,9 +93,18 @@ void lerDadosArquivo(FILE *f) {
 }
 
 float distancia(float X1, float Y1, float X2, float Y2) {
+    /*X1*=100;
+    Y1*=100;
+    X2*=100;
+    Y2*=100;*/
+    
     float distancia = pow(X1 - X2, 2) + pow(Y1 - Y2, 2);
 
-    distancia = abs((sqrtf(distancia)));
+    distancia = sqrtf(distancia);
+    
+    if(distancia<0){
+        distancia=-distancia;
+    }
 
     return distancia;
 }
