@@ -13,6 +13,7 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Arquivos de Recurso"
                    projectFiles="true">
+      <itemPath>e.csv</itemPath>
       <itemPath>iris_petalas.csv</itemPath>
       <itemPath>resultado.csv</itemPath>
       <itemPath>trabalho2.pdf</itemPath>
@@ -39,6 +40,8 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="e.csv" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="iris_petalas.csv" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
@@ -68,6 +71,8 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="e.csv" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="iris_petalas.csv" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
