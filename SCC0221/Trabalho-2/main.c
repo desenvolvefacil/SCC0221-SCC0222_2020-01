@@ -195,8 +195,10 @@ int main(int argc, char** argv) {
 
                     //novo valor =  média
                     //Corrigido agora
-                    grupoX[i] = qtd == 0 ? 0 : somaX / qtd;
-                    grupoY[i] = qtd == 0 ? 0 : somaY / qtd;
+                    if (qtd > 0) {
+                        grupoX[i] = somaX / qtd;
+                        grupoY[i] = somaY / qtd;
+                    }
                 }
             }
         }
