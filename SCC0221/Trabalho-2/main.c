@@ -6,7 +6,7 @@
 
 /* 
  * File:   main.c
- * Author: Carlao
+ * Author: Carlao - DesenvolveFacil.com.br
  *
  * Created on 19 de Novembro de 2020, 16:27
  */
@@ -45,6 +45,8 @@ FILE * abrirArqivo(char * nomeArquivo, char * modo) {
 
 void fecharArquivo(FILE * arquivo) {
     fclose(arquivo);
+    free(arquivo);
+    arquivo = NULL;
 }
 
 int lerInt() {
@@ -97,30 +99,29 @@ float distancia(float X1, float Y1, float X2, float Y2) {
     Y1*=100;
     X2*=100;
     Y2*=100;*/
-    
+
     float distancia = pow(X1 - X2, 2) + pow(Y1 - Y2, 2);
 
     distancia = sqrtf(distancia);
-    
-    if(distancia<0){
-        distancia=-distancia;
+
+    if (distancia < 0) {
+        distancia = -distancia;
     }
 
     return distancia;
 }
 
 char * floatToChar(float val) {
-    char * array = calloc(4,sizeof(char));
+    char * array = calloc(4, sizeof (char));
     snprintf(array, sizeof (array), "%.2f", val);
     return array;
 }
 
 char * intToChar(int val) {
-    char * array = calloc(4,sizeof(char));
+    char * array = calloc(4, sizeof (char));
     snprintf(array, sizeof (array), "%d", val);
     return array;
 }
-
 
 int main(int argc, char** argv) {
 
@@ -161,7 +162,7 @@ int main(int argc, char** argv) {
 
                 float menorDistancia = 99999;
 
-                //compada cada ponto com cada grupo
+                //compara cada ponto com cada grupo
                 for (l = 0; l < k; l++) {
                     float dist = distancia(pontosX[j], pontosY[j], grupoX[l], grupoY[l]);
 
@@ -193,8 +194,9 @@ int main(int argc, char** argv) {
                     }
 
                     //novo valor =  média
-                    grupoX[i] = somaX / qtd;
-                    grupoY[i] = somaY / qtd;
+                    //Corrigido agora
+                    grupoX[i] = qtd == 0 ? 0 : somaX / qtd;
+                    grupoY[i] = qtd == 0 ? 0 : somaY / qtd;
                 }
             }
         }
@@ -213,7 +215,7 @@ int main(int argc, char** argv) {
 
             char * aux = floatToChar(pontosX[i]);
             fwrite(aux, sizeof (aux), 1, novoArq);
-            
+
             fwrite(&vigula, sizeof (char), 1, novoArq);
 
 
@@ -228,11 +230,22 @@ int main(int argc, char** argv) {
             fwrite(aux, sizeof (aux), 1, novoArq);
             fwrite(&pulaLinha, sizeof (char), 1, novoArq);
 
+            //corrigido agora
+            free(aux);
+            aux = NULL;
         }
 
 
         fecharArquivo(novoArq);
     }
+
+    //corrigido agora
+    free(grupoX);
+    grupoX = NULL;
+
+    free(grupoY);
+    grupoY = NULL;
+
 
     return (EXIT_SUCCESS);
 }
